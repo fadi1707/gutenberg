@@ -2,5 +2,5 @@ FROM nginx:stable-alpine
 
 WORKDIR /etc/nginx/html
 
-#COPY ./nginx.conf /etc/nginx/
+COPY ./static /etc/nginx/html/static
 
