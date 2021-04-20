@@ -17,7 +17,7 @@ ENV DATABASE_NAME "gutenberg"
 ENV DATABASE_PASSWORD "123"
 ENV DATABASE_PORT "5432"
 ENV DATABASE_USER 'gutenberg'
-ENV STATIC_ROOT ''
+ENV STATIC_ROOT 'static'
 ENV SECRET_KEY "gutindexkey"
 ENV MEDIA_ROOT ''
 ENV EMAIL_HOST ''
@@ -27,8 +27,12 @@ ENV EMAIL_HOST_PASSWORD ''
 ENV MANAGER_EMAILS ''
 ENV MANAGER_NAMES ''
 
+VOLUME [ "/static" ]
+RUN ls -latr 
+
 
 #
 RUN chmod +x start_service..sh
 #
 ENTRYPOINT [ "./start_service..sh" ]
+#COPY ${STATIC_ROOT} /static

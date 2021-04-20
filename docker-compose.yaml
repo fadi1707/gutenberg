@@ -2,10 +2,23 @@ version: '2.1'
 
 services:
 
+    proxy:
+        image: nginx:latest
+        container_name: proxy
+        build: ./proxy
+        depends_on:
+            - gutenberg
+        volumes:
+          - ./proxy/nginx.conf:/etc/nginx/nginx.conf
+          #- ./proxy/static:/etc/nginx/html
+          - static:/etc/nginx/html
+        ports: 
+          - 80:80
+
     postgres:
-        image: postgres:latest
+        image: postgres:9.5
         ports:
-          - "5432:5432"
+          - 5432:5432
         environment: 
             POSTGRES_DB: 'gutenberg'
             POSTGRES_USER: 'gutenberg'
@@ -16,17 +29,20 @@ services:
             timeout: 5s
             retries: 5
         volumes: 
-            - postgres:/var/lib/postgresql
+            - postgres_data:/var/lib/postgresql
 
 
     gutenberg:
         image: "gutenberg"
         container_name: gutenberg
-        build: .
+        build: ./project
+        volumes: 
+            - static:/static
         depends_on:
             postgres:
                 condition: service_healthy
         ports: 
             - 8000:80
 volumes: 
-    postgres:
+    postgres_data:
+    static:
