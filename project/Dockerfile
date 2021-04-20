@@ -35,4 +35,4 @@ RUN ls -latr
 RUN chmod +x start_service..sh
 #
 ENTRYPOINT [ "./start_service..sh" ]
-#COPY ${STATIC_ROOT} /static
+COPY ${STATIC_ROOT} /static
