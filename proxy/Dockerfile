@@ -1,6 +1,8 @@
 FROM nginx:stable-alpine
 
-WORKDIR /etc/nginx/html
+WORKDIR /etc/nginx/html/
 
-COPY ./static /etc/nginx/html/static
+RUN rm /usr/share/nginx/html/50x.html /usr/share/nginx/html/index.html
+
+#COPY ./st /etc/nginx/html/static
 

@@ -10,7 +10,7 @@ services:
             - gutenberg
         volumes:
           - ./proxy/nginx.conf:/etc/nginx/nginx.conf
-          - static:/etc/nginx/html/static
+          - st:/etc/nginx/html/static
         ports: 
           - 80:80
 
@@ -36,7 +36,7 @@ services:
         container_name: gutenberg
         build: ./project
         volumes: 
-            - static:/static
+            - st:/st
         depends_on:
             postgres:
                 condition: service_healthy
@@ -44,4 +44,4 @@ services:
             - 8000:80
 volumes: 
     postgres_data:
-    static:
+    st:
