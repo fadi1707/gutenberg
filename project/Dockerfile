@@ -13,12 +13,12 @@ RUN pip install -r requirements.txt
 #
 VOLUME [ "/st" ]
 ENV ADMIN_NAMES 'Fadi'
-ENV ALLOWED_HOSTS 'localhost,.gutenberg,nginx,0.0.0.0,nginx'
+ENV ALLOWED_HOSTS 'localhost,gutenberg,nginx,0.0.0.0,nginx'
 ENV DATABASE_HOST 'postgres'
 ENV DATABASE_NAME "gutenberg"
 ENV DATABASE_PASSWORD "123"
 ENV DATABASE_PORT "5432"
-ENV DATABASE_USER 'gutenberg'
+ENV DATABASE_USER 'postgres'
 ENV STATIC_ROOT '/st'
 ENV SECRET_KEY "gutindexkey"
 ENV MEDIA_ROOT ''
@@ -29,7 +29,7 @@ ENV EMAIL_HOST_PASSWORD ''
 ENV MANAGER_EMAILS ''
 ENV MANAGER_NAMES ''
 
-COPY /books ${STATIC_ROOT}}
+
 RUN ls -latr 
 
 EXPOSE 8000
@@ -37,5 +37,7 @@ EXPOSE 8000
 RUN chmod +x start_service..sh
 #
 ENTRYPOINT [ "./start_service..sh" ]
+COPY books ${STATIC_ROOT}
+COPY catalog_files ${STATIC_ROOT}
 #COPY ${STATIC_ROOT} /st
 RUN ls -latr ${STATIC_ROOT}
